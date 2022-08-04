@@ -2,6 +2,7 @@ package tv
 
 import (
 	"log"
+	"strings"
 	"time"
 
 	"github.com/Davincible/gotiktoklive"
@@ -61,4 +62,15 @@ func (this *tiktok) set(tv *Tv) error {
 	}
 
 	return nil
+}
+
+// Permit parse the stream url to get streamer info.
+// eg. https://www.tiktok.com/@maki_1414
+func (this *tiktok) Permit(roomUrl RoomUrl) (*Tv, error) {
+	tv, error := this.base.Permit(roomUrl)
+	if error != nil {
+		return nil, error
+	}
+	tv.RoomID = strings.TrimPrefix(tv.RoomID, "@")
+	return tv, nil
 }
