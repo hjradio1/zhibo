@@ -26,6 +26,7 @@ type ITv interface {
 	StreamUrl() (string, bool)
 	RoomName() (string, bool)
 	StreamerName() (string, bool)
+	SiteName() string
 }
 
 type Tv struct {
